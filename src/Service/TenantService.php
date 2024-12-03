@@ -4,7 +4,7 @@ namespace AkeneoPresales\CustomAppEssentialsBundle\Service;
 
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\TenantInterface;
 use AkeneoPresales\CustomAppEssentialsBundle\PimApi\PimApiClientFromTenantFactory;
-use App\Exception\MissingPimApiAccessTokenException;
+use AkeneoPresales\CustomAppEssentialsBundle\Exception\MissingPimApiAccessTokenException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Lcobucci\JWT\Configuration;
