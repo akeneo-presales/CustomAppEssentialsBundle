@@ -14,5 +14,12 @@
             "email": "florian.lasdoulours@akeneo.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.1",
+        "symfony/config": "^4.0",
+        "symfony/dependency-injection": "^4.0",
+        "symfony/http-kernel": "^4.0",
+        "doctrine/orm": "^2.20",
+        "lcobucci/jwt": "^5.3"
+    }
 }
