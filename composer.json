@@ -1,0 +1,18 @@
+{
+    "name": "akeneo-presales/custom-app-essentials-bundle",
+    "description": "Akeneo Custom Apps Multi tenant Service classes, Event platform management UI and more",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "AkeneoPresales\\CustomAppEssentialsBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Florian Lasdoulours",
+            "email": "florian.lasdoulours@akeneo.com"
+        }
+    ],
+    "require": {}
+}
