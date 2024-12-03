@@ -1,0 +1,14 @@
+
+{{ form_start(form, {'action': url, 'attr': {'class': 'row g-3'} }) }}
+<div class="col-12">
+    {{ form_label(form.events, 'Choose events to listen to', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.events, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="col-12">
+    {{ form_label(form.config, 'Config', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.config, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+{{ form_end(form) }}

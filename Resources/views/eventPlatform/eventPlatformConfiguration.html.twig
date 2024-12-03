@@ -1,0 +1,112 @@
+{% extends 'connected-base.html.twig' %}
+{%  block stylesheets %}
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('features/translate/css/styles.css') }}">
+{% endblock %}
+{% block title %}Configuration{% endblock %}
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+            jQuery(document).ready(function(){
+                jQuery('.showSubscriptions').click(function(e){
+                    e.preventDefault();
+                    url = jQuery(this).attr('href');
+                    getUrl(url, jQuery(this).parent().parent().find('div.subscription_list'));
+                    return false;
+                });
+                jQuery('#newSubscriberBtn').click(function(e){
+                    e.preventDefault();
+                    url = jQuery(this).attr('href');
+                    getUrl(url, jQuery(this).parent().parent().find('#subscriber_form'));
+                    return false;
+                });
+                jQuery('.newSubscriptionBtn').click(function(e){
+                    e.preventDefault();
+                    url = jQuery(this).attr('href');
+                    getUrl(url, jQuery(this).parent().parent().find('div.subscription_form'));
+                    return false;
+                });
+                jQuery(document).on('click', '.editSubscription', function(e){
+                    e.preventDefault();
+                    url = jQuery(this).attr('href');
+                    console.log(jQuery(this).parent().parent().next('tr').find('.subscription_form'));
+                    getUrl(url, jQuery(this).parent().parent().next('tr').find('.subscription_form'));
+                    return false;
+                });
+                jQuery('a.showSubscriptions').trigger("click");
+        });
+
+            function getUrl(url, elem)
+            {
+                jQuery.ajax({
+                    method: "GET",
+                    url: url,
+                    dataType: 'json',
+                }).done(function(data) {
+                    if(data.result != '') {
+                        elem.html(data.result);
+                    }
+                });
+            }
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="products expanded">
+        <section class="product-grid">
+            <header class="product-grid__header">
+            </header>
+            <div class="container">
+                <div class="admin-form-container">
+                    <div class="admin-form">
+                        <div class="col-12">
+                            {% for message in app.flashes('success') %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            {% for message in app.flashes('error') %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            <h3>Event Platform configuration</h3>
+                            <hr />
+                            <h4>Subscriber list</h4>
+                            <ul>
+                            {% for subscriber in subscribers %}
+                                <li><strong>{{ subscriber['name'] }}</strong> : status <span class="state state-success">{{ subscriber['status'] }}</span>
+                                    <div class="float-right" style="margin-bottom: 10px">
+                                        <a href="{{ path('akeneo_presales_custom_app_essentials_event-platform-list-subscriptions', {'id': subscriber['id']}) }}" class="btn btn-primary btn-sm showSubscriptions hide">Show Subscriptions</a>
+                                        <a href="{{ path('akeneo_presales_custom_app_essentials_event-platform-create-https-subscription', {'id': subscriber['id']}) }}" class="btn btn-success btn-sm newSubscriptionBtn">New HTTPS Subscription</a>
+                                        <a href="{{ path('akeneo_presales_custom_app_essentials_event-platform-create-pubsub-subscription', {'id': subscriber['id']}) }}" class="btn btn-success btn-sm newSubscriptionBtn">New PubSub Subscription</a>
+                                    <a href="#" onclick="if (confirm('Delete subscriber?')) { event.preventDefault(); document.getElementById('delete-subscriber-form-{{ subscriber['id'] }}').submit(); }" class="btn btn-danger btn-sm">
+                                        Delete Subscriber
+                                    </a>
+
+                                    <form id="delete-subscriber-form-{{ subscriber['id'] }}" action="{{ path('akeneo_presales_custom_app_essentials_event-platform-delete-subscriber', { 'id': subscriber['id'] }) }}" method="post">
+                                        <input type="hidden" name="_method" value="delete">
+                                    </form>
+                                    </div>
+                                    <div class="subscription_form"></div>
+                                    <div class="subscription_list"></div>
+                                </li>
+                            {% else %}
+                                <li>No subscriber defined yet. <a href="{{ path('akeneo_presales_custom_app_essentials_event-platform-create-subscriber') }}" class="btn btn-akeneo-dark btn-sm" id="newSubscriberBtn">Create one</a></li>
+                                <li id="subscriber_form"></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

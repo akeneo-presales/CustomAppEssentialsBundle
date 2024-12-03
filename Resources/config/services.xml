@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <defaults autowire="true" autoconfigure="true"/>
+
+        <!-- makes classes in src/ available to be used as services -->
+        <!-- this creates a service per class whose id is the fully-qualified class name -->
+        <prototype namespace="AkeneoPresales\CustomAppEssentialsBundle\" resource="../../" exclude="../../{DependencyInjection,Entity,Enum,AkeneoPresalesCustomAppEssentialsBundle.php}"/>
+
+        <!-- Explicitly configure the service -->
+        <service id="akeneo_presales.service.akeneo_event_platform_service" class="AkeneoPresales\CustomAppEssentialsBundle\Service\AkeneoEventPlatformService" public="true"/>
+        <service id="akeneo_presales.pimapi.client_from_tenant_factory" class="AkeneoPresales\CustomAppEssentialsBundle\PimApi\PimApiClientFromTenantFactory" public="true"/>
+        <service alias="akeneo_presales.pimapi.client_from_tenant_factory" id="AkeneoPresales\CustomAppEssentialsBundle\PimApi\PimApiClientFromTenantFactory" />
+        <service id="akeneo_presales.service.get_tenant_service" class="AkeneoPresales\CustomAppEssentialsBundle\Service\GetTenantService" public="true">
+            <argument key="$tenantClass">App\\Entity\\Tenant</argument>
+            <argument key="$entityManager" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="AkeneoPresales\CustomAppEssentialsBundle\Service\GetTenantService" alias="akeneo_presales.service.get_tenant_service" />
+
+        <service id="akeneo_presales.service.tenant_service" class="AkeneoPresales\CustomAppEssentialsBundle\Service\TenantService" public="true">
+            <argument key="$tenantClass">App\\Entity\\Tenant</argument>
+            <argument key="$entityManager" id="doctrine.orm.entity_manager" />
+            <argument key="$client" id="http_client"/>
+            <argument key="$pimApiClientFromTenantFactory" id="akeneo_presales.pimapi.client_from_tenant_factory"/>
+        </service>
+
+        <service id="AkeneoPresales\CustomAppEssentialsBundle\Service\TenantService" alias="akeneo_presales.service.tenant_service" />
+
+    </services>
+</container>
