@@ -19,7 +19,7 @@
         "symfony/config": "^6.4",
         "symfony/dependency-injection": "^6.4",
         "symfony/http-kernel": "^6.4",
-        "doctrine/orm": "^2.20",
+        "doctrine/orm": "^2.14",
         "lcobucci/jwt": "^4.3.0",
         "guzzlehttp/guzzle": "^7.9",
         "symfony/framework-bundle": "^6.4",
