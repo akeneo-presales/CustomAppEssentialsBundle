@@ -7,8 +7,8 @@ namespace AkeneoPresales\CustomAppEssentialsBundle\PimApi;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\TenantInterface;
 use Akeneo\Pim\ApiClient\AkeneoPimClientBuilder;
 use Akeneo\Pim\ApiClient\AkeneoPimClientInterface;
-use App\Exception\MissingPimApiAccessTokenException;
-use App\Exception\MissingPimUrlException;
+use AkeneoPresales\CustomAppEssentialsBundle\Exception\MissingPimApiAccessTokenException;
+use AkeneoPresales\CustomAppEssentialsBundle\Exception\MissingPimUrlException;
 
 class PimApiClientFromTenantFactory
 {
