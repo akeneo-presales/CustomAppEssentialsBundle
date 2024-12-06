@@ -4,6 +4,14 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
         https://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="eight_points_guzzle.clients.akeneo_pim.base_url">https://graphql.sdk.akeneo.cloud/</parameter>
+        <parameter key="eight_points_guzzle.clients.akeneo_pim.options.timeout">30</parameter>
+        <parameter key="eight_points_guzzle.clients.akeneo_pim.options.http_errors">true</parameter>
+        <parameter key="eight_points_guzzle.clients.akeneo_pim.options.headers.User-Agent">GraphQL Client from Custom Apps</parameter>
+        <parameter key="idci_graphql_client.clients.akeneo_pim.http_client">eight_points_guzzle.client.akeneo_pim</parameter>
+    </parameters>
+
     <services>
 
         <defaults autowire="true" autoconfigure="true"/>

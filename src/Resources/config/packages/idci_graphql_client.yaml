@@ -1,4 +1,0 @@
-idci_graphql_client:
-    clients:
-        akeneo_pim:
-            http_client: 'eight_points_guzzle.client.akeneo_pim'
