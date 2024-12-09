@@ -1,12 +1,10 @@
 <?php
 namespace AkeneoPresales\CustomAppEssentialsBundle\Controller;
 
-use AkeneoPresales\CustomAppEssentialsBundle\Entity\Transformer\UIExtensionTransformer;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\UIExtension;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\UiExtensionConfiguration;
 use AkeneoPresales\CustomAppEssentialsBundle\Enum\UIextensionsEnum;
 use AkeneoPresales\CustomAppEssentialsBundle\Form\Type\UIExtensionType;
-use AkeneoPresales\CustomAppEssentialsBundle\Query\GuessCurrentLocaleQuery;
 use AkeneoPresales\CustomAppEssentialsBundle\Service\AkeneoUIExtensionService;
 use AkeneoPresales\CustomAppEssentialsBundle\Service\GetTenantService;
 use GuzzleHttp\Exception\RequestException;
@@ -20,8 +18,7 @@ class UIExtensionController extends AbstractController
 {
     public function __construct(
         private readonly AkeneoUIExtensionService $uiExtensionService,
-        private readonly GetTenantService $getTenantService,
-        private readonly GuessCurrentLocaleQuery $guessCurrentLocaleQuery,
+        private readonly GetTenantService $getTenantService
     ) {
     }
 
