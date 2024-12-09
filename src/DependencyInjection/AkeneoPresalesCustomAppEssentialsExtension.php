@@ -5,6 +5,7 @@ namespace AkeneoPresales\CustomAppEssentialsBundle\DependencyInjection;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\TenantInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -25,6 +26,10 @@ class AkeneoPresalesCustomAppEssentialsExtension extends Extension
                 break;
             }
         }
+
+        $phpLoader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
+        $phpLoader->load('eight_points_guzzle.php');
+        $phpLoader->load('idci_graphql_client.php');
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
