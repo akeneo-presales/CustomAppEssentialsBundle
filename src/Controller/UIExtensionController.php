@@ -4,6 +4,7 @@ namespace AkeneoPresales\CustomAppEssentialsBundle\Controller;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\Transformer\UIExtensionTransformer;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\UIExtension;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\UiExtensionConfiguration;
+use AkeneoPresales\CustomAppEssentialsBundle\Enum\UIextensionsEnum;
 use AkeneoPresales\CustomAppEssentialsBundle\Form\Type\UIExtensionType;
 use AkeneoPresales\CustomAppEssentialsBundle\Query\GuessCurrentLocaleQuery;
 use AkeneoPresales\CustomAppEssentialsBundle\Service\AkeneoUIExtensionService;
@@ -46,7 +47,7 @@ class UIExtensionController extends AbstractController
 
         $extension = new UIExtension();
         $configuration = new UIExtensionConfiguration();
-        foreach ($this->guessCurrentLocaleQuery->fetchPimAvailableLocales() as $localeCode => $locale) {
+        foreach (UIextensionsEnum::AVAILABLE_UI_LOCALES as $locale => $localeCode) {
             $configuration->setLabel($localeCode, '');
         }
         $extension->setConfiguration($configuration);
@@ -82,7 +83,7 @@ class UIExtensionController extends AbstractController
 
         $extension = $this->uiExtensionService->getExtension($tenant, $extensionCode);
 
-        foreach ($this->guessCurrentLocaleQuery->fetchPimAvailableLocales() as $localeCode => $locale) {
+        foreach (UIextensionsEnum::AVAILABLE_UI_LOCALES as $locale => $localeCode) {
             if(!$extension->getConfiguration()->hasLabel($localeCode)) {
                 $extension->getConfiguration()->setLabel($localeCode, '');
             }
@@ -102,9 +103,6 @@ class UIExtensionController extends AbstractController
 
                 return $this->redirectToRoute('akeneo_presales_custom_app_essentials_ui_extension_index');
             } catch (RequestException $exception) {
-                var_dump($exception->getResponse()->getBody()->getContents());
-                dump($exception->getResponse()->getBody()->getContents());
-                exit;
                 $this->addFlash('error', $exception->getMessage());
             }
         }
