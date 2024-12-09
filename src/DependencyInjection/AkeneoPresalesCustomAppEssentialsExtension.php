@@ -5,14 +5,15 @@ namespace AkeneoPresales\CustomAppEssentialsBundle\DependencyInjection;
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\TenantInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class AkeneoPresalesCustomAppEssentialsExtension extends Extension
+class AkeneoPresalesCustomAppEssentialsExtension  extends Extension implements PrependExtensionInterface
 {
-
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = $this->getConfiguration($configs, $container);
@@ -26,10 +27,6 @@ class AkeneoPresalesCustomAppEssentialsExtension extends Extension
                 break;
             }
         }
-
-        $phpLoader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
-        $phpLoader->load('eight_points_guzzle.php');
-        $phpLoader->load('idci_graphql_client.php');
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
@@ -46,8 +43,16 @@ class AkeneoPresalesCustomAppEssentialsExtension extends Extension
 
     }
 
+
     public function getAlias(): string
     {
         return 'akeneo_presales_custom_app_essentials';
+    }
+
+    public function prepend(ContainerBuilder $builder)
+    {
+        $phpLoader = new PhpFileLoader($builder, new FileLocator(\dirname(__DIR__).'/Resources/config'));
+        $phpLoader->load('eight_points_guzzle.php');
+        $phpLoader->load('idci_graphql_client.php');
     }
 }
