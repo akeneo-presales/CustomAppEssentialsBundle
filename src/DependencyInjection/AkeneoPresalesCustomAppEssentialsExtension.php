@@ -49,9 +49,9 @@ class AkeneoPresalesCustomAppEssentialsExtension  extends Extension implements P
         return 'akeneo_presales_custom_app_essentials';
     }
 
-    public function prepend(ContainerBuilder $builder)
+    public function prepend(ContainerBuilder $container)
     {
-        $phpLoader = new PhpFileLoader($builder, new FileLocator(\dirname(__DIR__).'/Resources/config'));
+        $phpLoader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
         $phpLoader->load('eight_points_guzzle.php');
         $phpLoader->load('idci_graphql_client.php');
     }
