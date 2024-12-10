@@ -18,7 +18,7 @@
 
         <!-- makes classes in src/ available to be used as services -->
         <!-- this creates a service per class whose id is the fully-qualified class name -->
-        <prototype namespace="AkeneoPresales\CustomAppEssentialsBundle\" resource="../../" exclude="../../{DependencyInjection,Entity,Enum,AkeneoPresalesCustomAppEssentialsBundle.php}"/>
+        <prototype namespace="AkeneoPresales\CustomAppEssentialsBundle\" resource="../../" exclude="../../{DependencyInjection,Entity,Enum,Resources,AkeneoPresalesCustomAppEssentialsBundle.php}"/>
 
         <!-- Explicitly configure the service -->
         <service id="akeneo_presales.service.akeneo_event_platform_service" class="AkeneoPresales\CustomAppEssentialsBundle\Service\AkeneoEventPlatformService" public="true"/>
