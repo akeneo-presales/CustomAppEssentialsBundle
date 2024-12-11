@@ -169,6 +169,9 @@ class AkeneoEventPlatformService
 
             $configObj->url = $config['url'] ?? '';
             $configObj->secret = $config['secret'];
+            if(is_null($configObj->secret['secondary'])) {
+                unset($configObj->secret['secondary']);
+            }
             $payload->config = $configObj;
         } elseif ($subscriptionType === 'pubsub') {
             $configObj = new \stdClass();
