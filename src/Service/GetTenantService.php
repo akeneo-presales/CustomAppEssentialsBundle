@@ -34,7 +34,7 @@ class GetTenantService
         $pimUrl = $session->get('pim_url');
 
         if (empty($pimUrl)) {
-            return new \LogicException('Can\'t retrieve PIM url, please restart the authorization process.');
+            throw new \LogicException('Can\'t retrieve PIM url, please restart the authorization process.');
         }
 
         return $this->tenantRepository->findOneBy(['domainName' => str_replace(['https://', 'http://'], '', $pimUrl)]);
