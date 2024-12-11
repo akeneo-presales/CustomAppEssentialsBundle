@@ -27,7 +27,6 @@ class UiExtensionConfiguration
 
     public function setUrl(string $url)
     {
-        dump($url);
         $this->url = $url;
         return $this;
     }
