@@ -13,7 +13,7 @@ class SubscriptionSecretType extends AbstractType
         $builder
             ->add('primary', TextType::class, [
                 'label' => 'Primary',
-                'required' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Your primary secret to sign the payload',
                 ],
