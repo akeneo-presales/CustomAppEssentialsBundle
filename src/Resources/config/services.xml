@@ -40,5 +40,10 @@
 
         <service id="AkeneoPresales\CustomAppEssentialsBundle\Service\TenantService" alias="akeneo_presales.service.tenant_service" />
 
+        <service id="akeneo_presales.service.graphql_service" class="AkeneoPresales\CustomAppEssentialsBundle\Service\GraphQLService" public="true"/>
+
+        <service id="AkeneoPresales\CustomAppEssentialsBundle\Service\GraphQLService" alias="akeneo_presales.service.graphql_service"/>
+
+
     </services>
 </container>
