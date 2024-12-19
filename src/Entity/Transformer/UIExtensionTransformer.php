@@ -10,6 +10,7 @@ class UIExtensionTransformer
     public static function apiResultToObject($result): UIExtension
     {
         $uiExtension = new UIExtension();
+        $uiExtension->setUuid($result['uuid']);
         $uiExtension->setCode($result['code']);
         $uiExtension->setPosition($result['position']);
         $uiExtension->setType($result['type']);

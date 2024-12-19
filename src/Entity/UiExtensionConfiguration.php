@@ -7,6 +7,8 @@ class UiExtensionConfiguration
 
     public string $url;
 
+    public string $defaultLabel;
+
     public array $labels = [];
 
     public function getLabels(): array
@@ -14,7 +16,7 @@ class UiExtensionConfiguration
         return $this->labels;
     }
 
-    public function setLabels(array $labels)
+    public function setLabels(array $labels): UiExtensionConfiguration
     {
         $this->labels = $labels;
         return $this;
@@ -25,13 +27,13 @@ class UiExtensionConfiguration
         return $this->url;
     }
 
-    public function setUrl(string $url)
+    public function setUrl(string $url): UiExtensionConfiguration
     {
         $this->url = $url;
         return $this;
     }
 
-    public function setLabel($locale, $label)
+    public function setLabel($locale, $label): UiExtensionConfiguration
     {
         $this->labels[$locale] = $label;
         return $this;
@@ -41,4 +43,16 @@ class UiExtensionConfiguration
     {
         return isset($this->labels[$locale]);
     }
+
+    public function getDefaultLabel(): string
+    {
+        return $this->defaultLabel;
+    }
+
+    public function setDefaultLabel(string $defaultLabel): UiExtensionConfiguration
+    {
+        $this->defaultLabel = $defaultLabel;
+        return $this;
+    }
+
 }

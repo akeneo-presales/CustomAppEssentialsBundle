@@ -4,6 +4,8 @@ namespace AkeneoPresales\CustomAppEssentialsBundle\Entity;
 class UIExtension
 {
 
+    private ?string $uuid = null;
+
     private string $code;
 
     private string $position;
@@ -12,12 +14,23 @@ class UIExtension
 
     private UiExtensionConfiguration $configuration;
 
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
+        return $this;
+    }
+
     public function getCode(): string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(string $code): UIExtension
     {
         $this->code = $code;
         return $this;

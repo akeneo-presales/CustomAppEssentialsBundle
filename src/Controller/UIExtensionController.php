@@ -73,12 +73,12 @@ class UIExtensionController extends AbstractController
     }
 
 
-    #[Route('/update/{extensionCode}', name: 'update', methods: ['GET', 'POST'])]
-    public function update(Request $request, $extensionCode): Response
+    #[Route('/update/{extensionUuid}', name: 'update', methods: ['GET', 'POST'])]
+    public function update(Request $request, $extensionUuid): Response
     {
         $tenant = $this->getTenantService->getTenant($request);
 
-        $extension = $this->uiExtensionService->getExtension($tenant, $extensionCode);
+        $extension = $this->uiExtensionService->getExtension($tenant, $extensionUuid);
 
         foreach (UIextensionsEnum::AVAILABLE_UI_LOCALES as $locale => $localeCode) {
             if(!$extension->getConfiguration()->hasLabel($localeCode)) {
@@ -111,12 +111,12 @@ class UIExtensionController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}/delete', name: 'delete', methods: ['POST'])]
+    #[Route('/{uuid}/delete', name: 'delete', methods: ['POST'])]
     public function delete(string $code, Request $request): Response
     {
         $tenant = $this->getTenantService->getTenant($request);
 
-        $success = $this->uiExtensionService->deleteExtension($tenant, $code);
+        $success = $this->uiExtensionService->deleteExtension($tenant, $uuid);
 
         if ($success) {
             $this->addFlash('success', 'Extension deleted!');

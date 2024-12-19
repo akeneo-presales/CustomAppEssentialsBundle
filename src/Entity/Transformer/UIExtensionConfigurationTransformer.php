@@ -25,6 +25,7 @@ class UIExtensionConfigurationTransformer
 
         return [
             'url' => $extensionConfiguration->getUrl(),
+            'default_label' => $extensionConfiguration->getDefaultLabel(),
             'labels' => $labels,
         ];
     }

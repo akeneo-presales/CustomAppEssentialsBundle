@@ -32,7 +32,7 @@ class AkeneoUIExtensionService
         $this->setClient($tenant);
 
         try {
-            $response = $this->client->get('/api/rest/v1/ui-extension');
+            $response = $this->client->get('/api/rest/v1/ui-extensions');
             return json_decode($response->getBody()->getContents(), true); // Returns list of extensions
         } catch (RequestException $e) {
             // Handle exceptions, e.g., log errors or return specific messages
@@ -40,12 +40,13 @@ class AkeneoUIExtensionService
         }
     }
 
-    public function getExtension(TenantInterface $tenant, string $uiExtensionCode)
+    public function getExtension(TenantInterface $tenant, string $uiExtensionUuid)
     {
         $extensions = $this->listExtensions($tenant);
 
         foreach ($extensions as $extension) {
-            if ($extension['code'] === $uiExtensionCode) {
+            dump($extension);
+            if ($extension['uuid'] === $uiExtensionUuid) {
                 return UIExtensionTransformer::apiResultToObject($extension);
             }
         }
@@ -55,7 +56,10 @@ class AkeneoUIExtensionService
     {
         $this->setClient($tenant);
 
-        $response = $this->client->post("/api/rest/v1/ui-extension/" . $extension->getCode(), [
+        $method = null === $extension->getUuid() ? 'post' : 'patch';
+        $url = null === $extension->getUuid() ? "/api/rest/v1/ui-extensions" : "/api/rest/v1/ui-extensions/" . $extension->getUuid();
+
+        $response = $this->client->{$method}($url, [
             'json' => UIExtensionTransformer::objectToApiResult($extension),
         ]);
 
@@ -69,12 +73,12 @@ class AkeneoUIExtensionService
         return null;
     }
 
-    public function deleteExtension(TenantInterface $tenant, string $uiExtensionCode): bool
+    public function deleteExtension(TenantInterface $tenant, string $uiExtensionUuid): bool
     {
         $this->setClient($tenant);
 
         try {
-            $this->client->delete("/api/rest/v1/ui-extension/$uiExtensionCode");
+            $this->client->delete("/api/rest/v1/ui-extensions/$uiExtensionUuid");
             return true; // Successfully deleted
         } catch (RequestException $e) {
             // Handle exceptions, e.g., log errors or return specific messages

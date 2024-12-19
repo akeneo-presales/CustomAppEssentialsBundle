@@ -19,6 +19,10 @@ class UIExtensionConfigurationType extends AbstractType
                 'label' => 'URL',
                 'required' => true,
             ])
+            ->add('defaultLabel', TextType::class, [
+                'label' => 'Default Label',
+                'required' => true,
+            ])
             ->add('labels', CollectionType::class, [
                 'entry_type' => TextType::class,
                 'entry_options' => [
