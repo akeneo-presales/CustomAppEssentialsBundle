@@ -10,6 +10,7 @@ class UIExtensionConfigurationTransformer
     {
         $configuration = new UIExtensionConfiguration();
         $configuration->setUrl($result['url']);
+        $configuration->setDefaultLabel($result['default_label']);
         $configuration->setLabels($result['labels']);
         return $configuration;
     }
