@@ -45,7 +45,6 @@ class AkeneoUIExtensionService
         $extensions = $this->listExtensions($tenant);
 
         foreach ($extensions as $extension) {
-            dump($extension);
             if ($extension['uuid'] === $uiExtensionUuid) {
                 return UIExtensionTransformer::apiResultToObject($extension);
             }
