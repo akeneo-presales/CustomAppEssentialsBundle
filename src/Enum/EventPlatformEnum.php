@@ -82,6 +82,9 @@ class EventPlatformEnum
     public const PRODUCT_MODEL_UPDATED_CODE = 'com.akeneo.pim.v1.product-model.updated';
     public const PRODUCT_MODEL_UPDATED_LABEL = 'Product Model Updated';
 
+    public const PRODUCT_MODEL_UPDATED_DELTA_CODE = 'com.akeneo.pim.v1.product-model.updated.delta';
+    public const PRODUCT_MODEL_UPDATED_DELTA_LABEL = 'Product Model Updated with Delta';
+
     public const PRODUCT_MODEL_DELETED_CODE = 'com.akeneo.pim.v1.product-model.deleted';
     public const PRODUCT_MODEL_DELETED_LABEL = 'Product Model Deleted';
 
@@ -130,6 +133,7 @@ class EventPlatformEnum
         self::PRODUCT_DELETED_LABEL => self::PRODUCT_DELETED_CODE,
         self::PRODUCT_MODEL_CREATED_LABEL => self::PRODUCT_MODEL_CREATED_CODE,
         self::PRODUCT_MODEL_UPDATED_LABEL => self::PRODUCT_MODEL_UPDATED_CODE,
+        self::PRODUCT_MODEL_UPDATED_DELTA_LABEL => self::PRODUCT_MODEL_UPDATED_DELTA_CODE,
         self::PRODUCT_MODEL_DELETED_LABEL => self::PRODUCT_MODEL_DELETED_CODE,
         self::FAMILY_CREATED_LABEL => self::FAMILY_CREATED_CODE,
         self::FAMILY_UPDATED_LABEL => self::FAMILY_UPDATED_CODE,
