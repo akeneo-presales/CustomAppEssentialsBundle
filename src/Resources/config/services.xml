@@ -44,6 +44,11 @@
 
         <service id="AkeneoPresales\CustomAppEssentialsBundle\Service\GraphQLService" alias="akeneo_presales.service.graphql_service"/>
 
+        <service id="akeneo_presales.service.pubsub_service" class="AkeneoPresales\CustomAppEssentialsBundle\Service\PubSubService" public="true">
+            <argument>%kernel.project_dir%%</argument>
+        </service>
+
+        <service id="AkeneoPresales\CustomAppEssentialsBundle\Service\PubSubService" alias="akeneo_presales.service.pubsub_service" />
 
     </services>
 </container>
