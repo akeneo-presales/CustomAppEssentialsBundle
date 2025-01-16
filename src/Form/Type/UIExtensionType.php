@@ -18,8 +18,8 @@ class UIExtensionType extends AbstractType
         $builder
             ->add('uuid', HiddenType::class, [
             ])
-            ->add('code', TextType::class, [
-                'label' => 'Code',
+            ->add('name', TextType::class, [
+                'label' => 'Name',
             ])
             ->add('position', ChoiceType::class, [
                 'label' => 'Position',

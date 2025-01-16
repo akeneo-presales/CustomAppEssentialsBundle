@@ -33,7 +33,7 @@
         {% if extensions is not empty %}
             {% for extension in extensions %}
                 <li>
-                    <strong>{{ extension.code }}</strong> ({{ extension.position }} - {{ extension.type }})
+                    <strong>{{ extension.name }}</strong> ({{ extension.position }} - {{ extension.type }})
                     <a href="{{ path('akeneo_presales_custom_app_essentials_ui_extension_update', {'extensionUuid': extension.uuid }) }}" class="btn btn-sm btn-info">Edit</a>
                     <form method="post" action="{{ path('akeneo_presales_custom_app_essentials_ui_extension_delete', { uuid: extension.uuid }) }}" style="display:inline;">
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>

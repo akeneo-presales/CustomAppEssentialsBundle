@@ -6,7 +6,7 @@ class UIExtension
 
     private ?string $uuid = null;
 
-    private string $code;
+    private string $name;
 
     private string $position;
 
@@ -25,14 +25,14 @@ class UIExtension
         return $this;
     }
 
-    public function getCode(): string
+    public function getName(): string
     {
-        return $this->code;
+        return $this->name;
     }
 
-    public function setCode(string $code): UIExtension
+    public function setName(string $name): UIExtension
     {
-        $this->code = $code;
+        $this->name = $name;
         return $this;
     }
 
