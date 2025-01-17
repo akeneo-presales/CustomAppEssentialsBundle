@@ -21,6 +21,9 @@ class UIExtensionType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Name',
             ])
+            ->add('description', TextType::class, [
+                'label' => 'Description',
+            ])
             ->add('position', ChoiceType::class, [
                 'label' => 'Position',
                 'choices' => [

@@ -12,6 +12,7 @@ class UIExtensionTransformer
         $uiExtension = new UIExtension();
         $uiExtension->setUuid($result['uuid']);
         $uiExtension->setName($result['name']);
+        $uiExtension->setDescription($result['description']);
         $uiExtension->setPosition($result['position']);
         $uiExtension->setType($result['type']);
         $uiExtension->setConfiguration(UIExtensionConfigurationTransformer::apiResultToObject($result['configuration']));
@@ -22,6 +23,7 @@ class UIExtensionTransformer
     {
         return [
             'name' => $extension->getName(),
+            'description' => $extension->getDescription(),
             'position' => $extension->getPosition(),
             'type' => $extension->getType(),
             'configuration' => UIExtensionConfigurationTransformer::objectToApiResult($extension->getConfiguration()),

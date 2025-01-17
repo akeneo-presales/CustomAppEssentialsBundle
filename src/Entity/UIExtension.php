@@ -7,7 +7,7 @@ class UIExtension
     private ?string $uuid = null;
 
     private string $name;
-
+    private string $description;
     private string $position;
 
     private string $type;
@@ -66,6 +66,17 @@ class UIExtension
     public function setConfiguration(UiExtensionConfiguration $configuration): self
     {
         $this->configuration = $configuration;
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): UIExtension
+    {
+        $this->description = $description;
         return $this;
     }
 }
