@@ -3,6 +3,7 @@
 namespace AkeneoPresales\CustomAppEssentialsBundle\Form\Type;
 
 use AkeneoPresales\CustomAppEssentialsBundle\Entity\UIExtension;
+use AkeneoPresales\CustomAppEssentialsBundle\Enum\UIextensionsEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -26,14 +27,7 @@ class UIExtensionType extends AbstractType
             ])
             ->add('position', ChoiceType::class, [
                 'label' => 'Position',
-                'choices' => [
-                    'Edit Product Header' => 'edit_product_header',
-                    'Edit Root Product Model Header' => 'edit_root_product_model_header',
-                    'Edit Sub Product Model Header' => 'edit_sub_product_model_header',
-                    'Edit Product Tab' => 'edit_product_tab',
-                    'Edit Category Tab' => 'edit_category_tab',
-                    'Product Grid Quick Action' => 'product_grid_quick_action',
-                ],
+                'choices' => UIextensionsEnum::POSITIONS_FORM_OPTIONS,
             ])
             ->add('type', ChoiceType::class, [
                 'label' => 'Type',
