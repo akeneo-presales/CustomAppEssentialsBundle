@@ -112,7 +112,7 @@ class UIExtensionController extends AbstractController
     }
 
     #[Route('/{uuid}/delete', name: 'delete', methods: ['POST'])]
-    public function delete(string $code, Request $request): Response
+    public function delete(string $uuid, Request $request): Response
     {
         $tenant = $this->getTenantService->getTenant($request);
 
