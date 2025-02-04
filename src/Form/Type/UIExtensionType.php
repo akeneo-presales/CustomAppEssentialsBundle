@@ -32,8 +32,8 @@ class UIExtensionType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => 'Type',
                 'choices' => [
-                    'Simple Button' => 'simple_button',
-                    'Simple IFrame' => 'simple_iframe',
+                    'Button' => 'open',
+                    'IFrame' => 'iframe',
                 ],
             ])
             ->add('configuration', UIExtensionConfigurationType::class, [
