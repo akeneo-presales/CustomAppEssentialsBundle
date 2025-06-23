@@ -23,10 +23,11 @@
         "lcobucci/jwt": "^4.3.0",
         "guzzlehttp/guzzle": "^7.9",
         "symfony/framework-bundle": "^6.4",
-        "symfony/form": "^6.4",
+        "symfony/form": "^7.2",
         "akeneo/api-php-client": "v11.3.0",
         "idci/graphql-client-bundle": "^1.2",
-        "google/cloud-pubsub": "^2.8"
+        "google/cloud-pubsub": "^2.8",
+        "symfony/validator": "^6.4"
     },
     "config": {
         "allow-plugins": {
