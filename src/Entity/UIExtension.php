@@ -1,6 +1,13 @@
 <?php
 
 namespace AkeneoPresales\CustomAppEssentialsBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+#[Assert\Expression(
+    expression: "this.getType() !== 'iframe' or (this.getConfiguration() and this.getConfiguration().getSecret())",
+    message: "A secret must be provided for the IFrame type."
+)]
 class UIExtension
 {
 
@@ -10,8 +17,9 @@ class UIExtension
     private string $description;
     private string $position;
 
-    private string $type;
+    private string $type='button';
 
+    #[Assert\Valid]
     private UiExtensionConfiguration $configuration;
 
     public function getUuid(): ?string

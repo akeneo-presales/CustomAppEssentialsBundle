@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UIExtensionType extends AbstractType
@@ -39,6 +41,25 @@ class UIExtensionType extends AbstractType
             ->add('configuration', UIExtensionConfigurationType::class, [
                 'label' => 'Configuration',
             ]);
+
+        $formModifier = function (FormEvent $event) {
+            $form = $event->getForm();
+            $data = $event->getData();
+
+            // For PRE_SUBMIT, data is an array. For PRE_SET_DATA, it's an object.
+            $type = is_array($data) ? ($data['type'] ?? null) : ($data ? $data->getType() : null);
+
+            $isSecretRequired = ($type === 'iframe');
+
+            $form->add('configuration', UIExtensionConfigurationType::class, [
+                'label' => 'Configuration',
+                'is_secret_required' => $isSecretRequired,
+            ]);
+        };
+
+        // Listen to both events to handle all cases
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, $formModifier);
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, $formModifier);
     }
 
     public function configureOptions(OptionsResolver $resolver)

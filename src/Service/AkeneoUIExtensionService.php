@@ -58,9 +58,21 @@ class AkeneoUIExtensionService
         $method = null === $extension->getUuid() ? 'post' : 'patch';
         $url = null === $extension->getUuid() ? "/api/rest/v1/ui-extensions" : "/api/rest/v1/ui-extensions/" . $extension->getUuid();
 
-        $response = $this->client->{$method}($url, [
-            'json' => UIExtensionTransformer::objectToApiResult($extension),
-        ]);
+        try {
+            $response = $this->client->{$method}($url, [
+                'json' => UIExtensionTransformer::objectToApiResult($extension),
+            ]);
+        } catch (RequestException $e) {
+            if ($e->getCode() === 422) {
+                // Handle validation errors, e.g., log them or return a specific message
+                $jsonResponse = json_decode($e->getResponse()->getBody()->getContents(), true);
+                $message = '';
+                foreach ($jsonResponse['errors'] as $error) {
+                    $message .= $error['property'] . ' : ' . $error['message']. "\n";
+                }
+                throw new \Exception('Validation failed : ' . $message);
+            }
+        }
 
         $statusCode = $response->getStatusCode();
         if ($statusCode === 201) {

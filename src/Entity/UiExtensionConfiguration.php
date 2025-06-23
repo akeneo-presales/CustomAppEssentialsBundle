@@ -7,6 +7,8 @@ class UiExtensionConfiguration
 
     public string $url;
 
+    public ?string $secret=null;
+
     public string $defaultLabel;
 
     public array $labels = [];
@@ -55,4 +57,14 @@ class UiExtensionConfiguration
         return $this;
     }
 
+    public function getSecret(): ?string
+    {
+        return $this->secret;
+    }
+
+    public function setSecret(string $secret): UiExtensionConfiguration
+    {
+        $this->secret = $secret;
+        return $this;
+    }
 }

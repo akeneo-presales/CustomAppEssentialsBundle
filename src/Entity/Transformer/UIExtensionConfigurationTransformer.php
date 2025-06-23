@@ -24,11 +24,18 @@ class UIExtensionConfigurationTransformer
             }
         }
 
-        return [
+        $tab = [
             'url' => $extensionConfiguration->getUrl(),
+            'secret' => $extensionConfiguration->getSecret(),
             'default_label' => $extensionConfiguration->getDefaultLabel(),
             'labels' => $labels,
         ];
+
+        if(!$extensionConfiguration->getSecret()) {
+            unset($tab['secret']);
+        }
+
+        return $tab;
     }
 
 }

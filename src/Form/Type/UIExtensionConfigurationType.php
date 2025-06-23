@@ -19,6 +19,9 @@ class UIExtensionConfigurationType extends AbstractType
                 'label' => 'URL',
                 'required' => true,
             ])
+            ->add('secret', TextType::class, [
+                'label' => 'Secret',
+                'required' => $options['is_secret_required'],])
             ->add('defaultLabel', TextType::class, [
                 'label' => 'Default Label',
                 'required' => true,
@@ -33,11 +36,13 @@ class UIExtensionConfigurationType extends AbstractType
                 'allow_delete' => false,
                 'label' => 'Labels',
             ]);
+
     }
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => UiExtensionConfiguration::class,
+            'is_secret_required' => false,
         ]);
     }
 }
