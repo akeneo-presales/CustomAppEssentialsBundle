@@ -62,6 +62,26 @@ class EventPlatformEnum
     public const CONNECTION_DELETED_CODE = 'com.akeneo.pim.v1.connection.deleted';
     public const CONNECTION_DELETED_LABEL = 'Connection Deleted';
 
+    // Family Events
+    public const FAMILY_CREATED_CODE = 'com.akeneo.pim.v1.family.created';
+    public const FAMILY_CREATED_LABEL = 'Family Created';
+
+    public const FAMILY_UPDATED_CODE = 'com.akeneo.pim.v1.family.updated';
+    public const FAMILY_UPDATED_LABEL = 'Family Updated';
+
+    public const FAMILY_DELETED_CODE = 'com.akeneo.pim.v1.family.deleted';
+    public const FAMILY_DELETED_LABEL = 'Family Deleted';
+
+    // Job Events
+    public const JOB_EXPORT_STATUS_CHANGED_CODE = 'com.akeneo.pim.v1.job.export.status-changed';
+    public const JOB_EXPORT_STATUS_CHANGED_LABEL = 'Job Export Status Changed';
+
+    public const JOB_MASS_EDIT_STATUS_CHANGED_CODE = 'com.akeneo.pim.v1.job.mass-edit.status-changed';
+    public const JOB_MASS_EDIT_STATUS_CHANGED_LABEL = 'Job Mass Edit Status Changed';
+
+    public const JOB_IMPORT_STATUS_CHANGED_CODE = 'com.akeneo.pim.v1.job.import.status-changed';
+    public const JOB_IMPORT_STATUS_CHANGED_LABEL = 'Job Import Status Changed';
+
     // Product Events
     public const PRODUCT_CREATED_CODE = 'com.akeneo.pim.v1.product.created';
     public const PRODUCT_CREATED_LABEL = 'Product Created';
@@ -88,16 +108,6 @@ class EventPlatformEnum
     public const PRODUCT_MODEL_DELETED_CODE = 'com.akeneo.pim.v1.product-model.deleted';
     public const PRODUCT_MODEL_DELETED_LABEL = 'Product Model Deleted';
 
-    // Family Events
-    public const FAMILY_CREATED_CODE = 'com.akeneo.pim.v1.family.created';
-    public const FAMILY_CREATED_LABEL = 'Family Created';
-
-    public const FAMILY_UPDATED_CODE = 'com.akeneo.pim.v1.family.updated';
-    public const FAMILY_UPDATED_LABEL = 'Family Updated';
-
-    public const FAMILY_DELETED_CODE = 'com.akeneo.pim.v1.family.deleted';
-    public const FAMILY_DELETED_LABEL = 'Family Deleted';
-
     // Reference Entity Record Events
     public const REFERENCE_ENTITY_RECORD_CREATED_CODE = 'com.akeneo.pim.v1.reference-entity-record.created';
     public const REFERENCE_ENTITY_RECORD_CREATED_LABEL = 'Reference Entity Record Created';
@@ -107,6 +117,14 @@ class EventPlatformEnum
 
     public const REFERENCE_ENTITY_RECORD_DELETED_CODE = 'com.akeneo.pim.v1.reference-entity-record.deleted';
     public const REFERENCE_ENTITY_RECORD_DELETED_LABEL = 'Reference Entity Record Deleted';
+
+    // Workflow Events
+    public const WORKFLOW_TASK_CREATED_CODE = 'com.akeneo.pim.v1.workflow.task.created';
+    public const WORKFLOW_TASK_CREATED_LABEL = 'Workflow Task Created';
+
+    public const WORKFLOW_TASK_COMPLETED_CODE = 'com.akeneo.pim.v1.workflow.task.completed';
+    public const WORKFLOW_TASK_COMPLETED_LABEL = 'Workflow Task Completed';
+
 
     // Grouped array of events: labels as keys, codes as values
     public const EVENTS = [
@@ -127,6 +145,12 @@ class EventPlatformEnum
         self::CATEGORY_UPDATED_LABEL => self::CATEGORY_UPDATED_CODE,
         self::CATEGORY_DELETED_LABEL => self::CATEGORY_DELETED_CODE,
         self::CONNECTION_DELETED_LABEL => self::CONNECTION_DELETED_CODE,
+        self::FAMILY_CREATED_LABEL => self::FAMILY_CREATED_CODE,
+        self::FAMILY_UPDATED_LABEL => self::FAMILY_UPDATED_CODE,
+        self::FAMILY_DELETED_LABEL => self::FAMILY_DELETED_CODE,
+        self::JOB_EXPORT_STATUS_CHANGED_LABEL => self::JOB_EXPORT_STATUS_CHANGED_CODE,
+        self::JOB_MASS_EDIT_STATUS_CHANGED_LABEL => self::JOB_MASS_EDIT_STATUS_CHANGED_CODE,
+        self::JOB_IMPORT_STATUS_CHANGED_LABEL => self::JOB_IMPORT_STATUS_CHANGED_CODE,
         self::PRODUCT_CREATED_LABEL => self::PRODUCT_CREATED_CODE,
         self::PRODUCT_UPDATED_LABEL => self::PRODUCT_UPDATED_CODE,
         self::PRODUCT_UPDATED_DELTA_LABEL => self::PRODUCT_UPDATED_DELTA_CODE,
@@ -135,11 +159,10 @@ class EventPlatformEnum
         self::PRODUCT_MODEL_UPDATED_LABEL => self::PRODUCT_MODEL_UPDATED_CODE,
         self::PRODUCT_MODEL_UPDATED_DELTA_LABEL => self::PRODUCT_MODEL_UPDATED_DELTA_CODE,
         self::PRODUCT_MODEL_DELETED_LABEL => self::PRODUCT_MODEL_DELETED_CODE,
-        self::FAMILY_CREATED_LABEL => self::FAMILY_CREATED_CODE,
-        self::FAMILY_UPDATED_LABEL => self::FAMILY_UPDATED_CODE,
-        self::FAMILY_DELETED_LABEL => self::FAMILY_DELETED_CODE,
         self::REFERENCE_ENTITY_RECORD_CREATED_LABEL => self::REFERENCE_ENTITY_RECORD_CREATED_CODE,
         self::REFERENCE_ENTITY_RECORD_UPDATED_LABEL => self::REFERENCE_ENTITY_RECORD_UPDATED_CODE,
         self::REFERENCE_ENTITY_RECORD_DELETED_LABEL => self::REFERENCE_ENTITY_RECORD_DELETED_CODE,
+        self::WORKFLOW_TASK_CREATED_LABEL => self::WORKFLOW_TASK_CREATED_CODE,
+        self::WORKFLOW_TASK_COMPLETED_LABEL => self::WORKFLOW_TASK_COMPLETED_CODE,
     ];
 }
