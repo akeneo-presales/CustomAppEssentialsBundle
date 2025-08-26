@@ -14,6 +14,7 @@ class SubscriptionSecretType extends AbstractType
             ->add('primary', TextType::class, [
                 'label' => 'Primary',
                 'required' => true,
+                'help' => '(16+ characters recommended)',
                 'attr' => [
                     'placeholder' => 'Your primary secret to sign the payload',
                 ],
@@ -21,6 +22,7 @@ class SubscriptionSecretType extends AbstractType
             ->add('secondary', TextType::class, [
                 'label' => 'Secondary',
                 'required' => false,
+                'help' => '(16+ characters recommended)',
                 'attr' => [
                     'placeholder' => 'Optional secondary secret for secret rotation',
                 ],

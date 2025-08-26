@@ -14,6 +14,7 @@ class SubscriptionHttpsConfigType extends AbstractType
             ->add('url', TextType::class, [
                 'label' => 'Webhook URL',
                 'required' => true,
+                'help' => 'The URL to which the webhook payloads will be delivered. Get a free and simple webhook URL at https://webhook.site/',
                 'attr' => [
                     'placeholder' => 'https://your_webhook_url',
                 ],
