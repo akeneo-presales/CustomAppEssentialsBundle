@@ -8,6 +8,7 @@ use AkeneoPresales\CustomAppEssentialsBundle\Service\AkeneoEventPlatformService;
 use AkeneoPresales\CustomAppEssentialsBundle\Service\GetTenantService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EventPlatformEditSubscribtionAction extends AbstractController
@@ -29,10 +30,16 @@ class EventPlatformEditSubscribtionAction extends AbstractController
             try {
                 $akeneoEventPlatformService->updateSubscription($tenant, $subscriber_id, $id, $subObj->getEvents(),$subObj->getType(), $subObj->getConfig());
                 $this->addFlash('success', 'Subscription updated successfully.');
+                return $this->json(
+                    ['success' => true, 'message' => 'Subscription updated successfully.'],
+                    Response::HTTP_OK
+                );
             } catch (\Exception $e) {
-                $this->addFlash('error', $e->getMessage());
+                return $this->json(
+                    ['success' => true, 'message' => $e->getMessage()],
+                    Response::HTTP_OK
+                );
             }
-            return $this->redirectToRoute('akeneo_presales_custom_app_essentials_event_platform_configuration');
         }
 
         return $this->json(['result' => $this->renderView('@AkeneoPresalesCustomAppEssentials/eventPlatform/editSubscriptionForm.html.twig', [

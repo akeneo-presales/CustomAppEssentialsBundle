@@ -8,6 +8,7 @@ use AkeneoPresales\CustomAppEssentialsBundle\Service\AkeneoEventPlatformService;
 use AkeneoPresales\CustomAppEssentialsBundle\Service\GetTenantService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EventPlatformCreateHttpsSubscribtionAction extends AbstractController
@@ -26,10 +27,17 @@ class EventPlatformCreateHttpsSubscribtionAction extends AbstractController
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             try {
                 $akeneoEventPlatformService->createSubscription($tenant, $id, $subObj->getEvents(), $subObj->getType(), $subObj->getConfig());
+                // For AJAX, return a JSON success response
                 $this->addFlash('success', 'HTTPS Subscription created successfully.');
-                return $this->redirectToRoute('akeneo_presales_custom_app_essentials_event_platform_configuration');
+                return $this->json(
+                    ['success' => true, 'message' => 'HTTPS Subscription created successfully.'],
+                    Response::HTTP_OK
+                );
             } catch (\Exception $e) {
-                $this->addFlash('error', $e->getMessage());
+                return $this->json(
+                    ['success' => false, 'message' => $e->getMessage()],
+                    Response::HTTP_BAD_REQUEST
+                );
             }
         }
 

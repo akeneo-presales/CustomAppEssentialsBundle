@@ -54,6 +54,8 @@
                     }
                 });
             }
+
+
     </script>
 
 {% endblock %}
@@ -67,16 +69,18 @@
                 <div class="admin-form-container">
                     <div class="admin-form">
                         <div class="col-12">
-                            {% for message in app.flashes('success') %}
-                                <div class="alert alert-success" role="alert">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                            {% for message in app.flashes('error') %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
+                            <div id="form-messages">
+                                {% for message in app.flashes('success') %}
+                                    <div class="alert alert-success" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                                {% for message in app.flashes('error') %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
                             <h3>Event Platform configuration</h3>
                             <hr />
                             <h4>Subscriber list</h4>

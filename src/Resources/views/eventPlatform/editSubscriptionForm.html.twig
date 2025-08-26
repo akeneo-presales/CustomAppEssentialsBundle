@@ -12,3 +12,83 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </div>
 {{ form_end(form) }}
+
+<script type="text/javascript">
+    // Wait for the document to be fully loaded before running the script
+    $(function() {
+
+        // Select the form by its name attribute and listen for the 'submit' event
+        $('form[name="subscription"]').on('submit', function(event) {
+
+            // 1. Prevent the default form submission behavior
+            event.preventDefault();
+
+            // 2. Cache necessary jQuery elements
+            var $form = $(this);
+            var $submitButton = $form.find('button[type="submit"]');
+
+            // 3. Get form details
+            var url = $form.attr('action');
+            var method = $form.attr('method');
+            var formData = $form.serialize();
+
+            // 4. Provide user feedback and prevent multiple submissions
+            $submitButton.prop('disabled', true).text('Submitting...');
+
+            // **NEW**: Remove any message block from a previous submission
+            // We will add the 'js-form-message' class to our dynamically created alerts.
+            $('.js-form-message').remove();
+
+            // 5. Perform the AJAX request
+            $.ajax({
+                type: method,
+                url: url,
+                data: formData,
+                dataType: 'json'
+            })
+                .done(function(response) {
+                    // SUCCESS: Server responded with 2xx status
+                    console.log('Success:', response);
+
+                    // Create the success message HTML with our special class for later removal
+                    var successHtml = `
+                <div class="alert alert-success js-form-message" role="alert">
+                    ${response.message}
+                </div>`;
+
+                    // **NEW**: Prepend the message right before the form element
+                    $form.before(successHtml);
+
+                    // Optionally reset the form on success
+                    $form[0].reset();
+
+                    document.location.reload();
+
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    // ERROR: Server responded with 4xx or 5xx status
+                    console.error('Error:', textStatus, errorThrown);
+
+                    // Determine the error message
+                    var errorMessage = 'An error occurred. Please try again later.';
+                    if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                        errorMessage = jqXHR.responseJSON.message;
+                    }
+
+                    // Create the error message HTML with our special class
+                    var errorHtml = `
+                <div class="alert alert-danger js-form-message" role="alert">
+                    ${errorMessage}
+                </div>`;
+
+                    // **NEW**: Prepend the message right before the form element
+                    $form.before(errorHtml);
+                })
+                .always(function() {
+                    // ALWAYS: This runs after success or error
+                    // Re-enable the submit button
+                    $submitButton.prop('disabled', false).text('Submit');
+                });
+        });
+    });
+</script>

@@ -1,3 +1,7 @@
 .subscription_form form {
     width: 100%;
 }
+
+.subscription_form div.alert{
+    margin-top: 20px;
+}
