@@ -73,9 +73,21 @@ class AkeneoEventPlatformService
 
         $payload = $this->buildSubscriptionPayload($eventTypes, $subscriptionType, $config);
 
-        $response = $this->client->post("/api/v1/subscribers/$subscriberId/subscriptions", [
-            'json' => $payload,
-        ]);
+        try {
+            $response = $this->client->post("/api/v1/subscribers/$subscriberId/subscriptions", [
+                'json' => $payload,
+            ]);
+        } catch (RequestException $e) {
+            if ($e->getCode() === 422 || $e->getCode() === 400) {
+                // Handle validation errors, e.g., log them or return a specific message
+                $jsonResponse = json_decode($e->getResponse()->getBody()->getContents(), true);
+                $message = '';
+                foreach ($jsonResponse['errors'] as $error) {
+                    $message .= $error['message']. "\n";
+                }
+                throw new \Exception('Validation failed : ' . $message);
+            }
+        }
 
         $data = json_decode($response->getBody()->getContents(), true);
         return $data['id'] ?? null; // Return subscription ID

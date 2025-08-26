@@ -27,10 +27,10 @@ class EventPlatformCreateHttpsSubscribtionAction extends AbstractController
             try {
                 $akeneoEventPlatformService->createSubscription($tenant, $id, $subObj->getEvents(), $subObj->getType(), $subObj->getConfig());
                 $this->addFlash('success', 'HTTPS Subscription created successfully.');
+                return $this->redirectToRoute('akeneo_presales_custom_app_essentials_event_platform_configuration');
             } catch (\Exception $e) {
                 $this->addFlash('error', $e->getMessage());
             }
-            return $this->redirectToRoute('akeneo_presales_custom_app_essentials_event_platform_configuration');
         }
 
         return $this->json(['result' => $this->renderView('@AkeneoPresalesCustomAppEssentials/eventPlatform/editSubscriptionForm.html.twig', [
